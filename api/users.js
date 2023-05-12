@@ -35,6 +35,17 @@ router.get("/fetch-user", async (req, res) => {
   }
 });
 
+router.get("/all-users", async (req, res) => {
+  try {
+    User.find().then((user) => {
+      res.json(user);
+    })
+  } catch (error) {
+    console.log(error);
+    res.send({ sucess: false });
+  }
+});
+
 router.post("/edit-score", async (req, res) => {
   try {
     const {user_id, score} = req.body
