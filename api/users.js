@@ -35,4 +35,40 @@ router.get("/fetch-user", async (req, res) => {
   }
 });
 
+router.post("/edit-score", async (req, res) => {
+  try {
+    const {user_id, score} = req.body
+    User.findOne({_id: user_id}).then((user) => {
+      if(!user) {
+        return res.status(400).json({
+          message: "User does not exist.",
+        });
+      }
+      User.updateOne(
+        { _id : user_id },
+        {
+          $set: {
+            score: score
+          },
+        },
+        { upsert: true }
+      )
+      .then((User, err) => {
+        if (err) {
+          return res.status(500).json({
+            message:
+              "There was some problem processing the request. Please try again later.",
+          });
+        }
+        return res.status(201).json({
+          message: "Success",
+        });
+      });
+    })
+  } catch (error) {
+    console.log(error);
+    res.send({ sucess: false });
+  }
+});
+
 module.exports = router;
