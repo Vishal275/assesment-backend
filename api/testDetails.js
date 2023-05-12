@@ -28,7 +28,7 @@ router.post("/edit", (req, res) => {
       answer10,
       comment10,
      } = reqBody;
-    User.findOne({ _id: user_id })
+    User.find({ _id: user_id })
       .then((user) => {
         if (!user) {
           return res.status(400).json({
