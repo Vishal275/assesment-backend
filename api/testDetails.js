@@ -1,6 +1,6 @@
 const express = require("express");
 const User = require("../models/User");
-const testDetails = require("../models/Testdetails");
+const testDetails = require("../models/TestDetails");
 const router = express.Router();
 
 router.post("/edit", (req, res) => {
