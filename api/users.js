@@ -5,7 +5,7 @@ const router = express.Router();
 // @route POST api/users/create
 router.post("/create", async (req, res) => {
   try {
-    await User.find({ email: req.body.email })
+    await User.findOne({ email: req.body.email })
     .then((user) => {
       if (user) {
         return res.status(400).json({
@@ -25,7 +25,7 @@ router.post("/create", async (req, res) => {
 
 router.get("/fetch-user", async (req, res) => {
   try {
-    User.find({email: req.body.email}).then((user) => {
+    User.findOne({email: req.body.email}).then((user) => {
       // res.send(user)
       console.log(user);
     })
@@ -38,7 +38,7 @@ router.get("/fetch-user", async (req, res) => {
 router.post("/edit-score", async (req, res) => {
   try {
     const {user_id, score} = req.body
-    User.find({_id: user_id}).then((user) => {
+    User.findOne({_id: user_id}).then((user) => {
       if(!user) {
         return res.status(400).json({
           message: "User does not exist.",
