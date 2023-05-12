@@ -30,41 +30,43 @@ mongoose
 //   next();
 // });
 
-var allowedOrigins = [
-  config.get("frontend_url.production"),
-  "https://frontend-dev-techsierra.netlify.app",
-  "http://localhost:3000",
-];
+app.use(cors());
 
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      // allow requests with no origin
-      if (!origin) return callback(null, true);
+// var allowedOrigins = [
+//   "https://frontend-dev-techsierra.netlify.app",
+//   "http://localhost:3000",
+//   config.get("frontend_url.production"),
+// ];
 
-      for (var i = 0; i < allowedOrigins.length; i++) {
-        var allowedOrigin = allowedOrigins[i];
+// app.use(
+//   cors({
+//     origin: function (origin, callback) {
+//       // allow requests with no origin
+//       if (!origin) return callback(null, true);
 
-        // if origin matches an allowed origin, allow the request
-        if (typeof allowedOrigin === "string" && allowedOrigin == origin) {
-          return callback(null, true);
-        } else if (
-          allowedOrigin instanceof RegExp &&
-          allowedOrigin.test(origin)
-        ) {
-          return callback(null, true);
-        }
-      }
+//       for (var i = 0; i < allowedOrigins.length; i++) {
+//         var allowedOrigin = allowedOrigins[i];
 
-      // if origin is not allowed
-      var msg =
-        "The CORS policy for this site does not " +
-        "allow access from the specified Origin.";
-      return callback(new Error(msg), false);
-    },
-    credentials: true,
-  })
-);
+//         // if origin matches an allowed origin, allow the request
+//         if (typeof allowedOrigin === "string" && allowedOrigin == origin) {
+//           return callback(null, true);
+//         } else if (
+//           allowedOrigin instanceof RegExp &&
+//           allowedOrigin.test(origin)
+//         ) {
+//           return callback(null, true);
+//         }
+//       }
+
+//       // if origin is not allowed
+//       var msg =
+//         "The CORS policy for this site does not " +
+//         "allow access from the specified Origin.";
+//       return callback(new Error(msg), false);
+//     },
+//     credentials: true,
+//   })
+// );
 
 app.get("/", (req, res) => {
   res.status(200).send("Hello server is running").end();
