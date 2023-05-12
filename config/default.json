@@ -1,3 +1,6 @@
 {
-    "mongoURI" : "mongodb+srv://vishalkudtarkar785:XFsGLIsJzO9ueS5m@cluster0.sszqjgr.mongodb.net/assesment?retryWrites=true&w=majority"
+    "mongoURI": "mongodb+srv://vishalkudtarkar785:XFsGLIsJzO9ueS5m@cluster0.sszqjgr.mongodb.net/assesment?retryWrites=true&w=majority",
+    "frontend_url": {
+        "production": "https://frontend-dev-techsierra.netlify.app"
+    }
 }
