@@ -15,7 +15,7 @@ router.post("/create", async (req, res) => {
       User.create({
         userName: req.body.userName,
         email: req.body.email,
-      }).then((user) => {res.status(200).json({user: user, sucess: true })});
+      }).then((user) => {res.status(200).json({user: user, sucess: true })}).catch(error => console.log(error));
     })
   } catch (error) {
     console.log(error);
@@ -73,6 +73,12 @@ router.post("/edit-score", async (req, res) => {
         }
         return res.status(201).json({
           message: "Success",
+        });
+      }).catch((error) => {
+        console.log(`Error while entering data : ${error}`);
+        return res.status(500).json({
+          message:
+            "There was some problem processing the request. Please try again later.",
         });
       });
     })
